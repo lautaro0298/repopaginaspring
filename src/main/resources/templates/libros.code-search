@@ -1,0 +1,17 @@
+# Query: libros
+
+6 results - 4 files
+
+modificarLibro.html:
+  29:                             <a class="nav-link active" aria-current="page" href="/listado/libro">Libros</a>
+  49: formulario para registro de nuevos Libros
+
+registoeditorial.html:
+  24:                         <a class="nav-link active" aria-current="page" href="/listado/libro">Libros</a>
+
+registroautor.html:
+  41:                 >libros</a
+
+registroLibro.html:
+  29:                             <a class="nav-link active" aria-current="page" href="/listado/libro">Libros</a>
+  49: formulario para registro de nuevos Libros
