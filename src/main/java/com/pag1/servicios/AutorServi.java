@@ -63,6 +63,15 @@ public class AutorServi {
     public List<Autor> todos(){
         return (List<Autor>) aut.findAll();
     }
-    
+     @Transactional
+    public void baja(String id){
+       Autor autor=aut.findById(id).orElse(null);
+       autor.setAlta(false);
+    }
+    @Transactional
+     public void alta(String id){
+       Autor edi=aut.findById(id).orElse(null);
+       edi.setAlta(true);
+    }
     
 }

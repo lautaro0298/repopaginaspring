@@ -31,4 +31,6 @@ public class Libro implements Serializable {
     private Autor autor;
     @OneToOne
     private Editorial editorial;
+    @OneToOne
+    private Foto foto; 
 }

@@ -28,9 +28,10 @@ public class EditorialServi {
       edirepo.save(edi);
     }
      @Transactional
-    public void modificar(Editorial edi) throws Exception{
-        validar(edi);
-        if(edirepo.findById(edi.getId()).isPresent()){
+    public void modificar(String id , String nombre) throws Exception{
+        Editorial edi = edirepo.findById(id).orElse(null);
+        if(edi != null){
+            edi.setNombre(nombre);
             edirepo.save(edi);
         }else{throw new Exception("no se encontro la editorial");}
     }
@@ -41,7 +42,16 @@ public class EditorialServi {
             edirepo.delete(edi);
         }else{throw new Exception("no se encontro la editorial");}
     }
-    
+    @Transactional
+    public void baja(String id){
+       Editorial edi=edirepo.findById(id).orElse(null);
+       edi.setAlta(false);
+    }
+    @Transactional
+     public void alta(String id){
+       Editorial edi=edirepo.findById(id).orElse(null);
+       edi.setAlta(true);
+    }
     public void validar(Editorial edi) throws Exception{
        /* if(edi.getId()==null || edi.getId().isEmpty()){
          throw new Exception("Id vacio");   

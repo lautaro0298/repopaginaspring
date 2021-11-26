@@ -54,7 +54,7 @@ public class modificar {
         @GetMapping("/autor")
     public String modificarA(ModelMap modelo , @RequestParam String id){
         
-        modelo.put("autor",libroS.buscarporid(id) );
+        modelo.put("autor",autorS.buscarporid(id) );
         return "modificarautor";
         
     }
@@ -77,8 +77,8 @@ public class modificar {
     }
     @PostMapping("/editorial")
     public String ModificarE(ModelMap modelo,@RequestParam String id , @RequestParam String nombre  ) throws Exception{
-        
-        autorS.modificar(id, nombre);
+         
+        ediS.modificar(id , nombre);
         modelo.put("exito", "modificado exitoso");
         List<Editorial> editoriales;
         editoriales=ediS.todos();

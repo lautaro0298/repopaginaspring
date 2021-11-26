@@ -7,14 +7,17 @@ package com.pag1.servicios;
 
 import com.pag1.entidades.Autor;
 import com.pag1.entidades.Editorial;
+import com.pag1.entidades.Foto;
 import com.pag1.entidades.Libro;
 import com.pag1.repositorios.Autorrepo;
 import com.pag1.repositorios.Editorialrepo;
+import com.pag1.repositorios.Fotorepo;
 import com.pag1.repositorios.Librorepo;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class LibroServi {
@@ -24,7 +27,8 @@ public class LibroServi {
     Autorrepo auto;
     @Autowired
     Editorialrepo adi;
-    
+    @Autowired 
+    FotoServi foto;
     
     @Transactional
     public void registrar (String titulo , int anio,int ejemplares , long isbn , Autor aut,Editorial e) throws Exception{
@@ -73,6 +77,16 @@ public class LibroServi {
             librorepo.save(lib);
         }else{throw new Exception("Error no se encontro el libro");}
     }
+    public void cargarfoto(MultipartFile archivo,String idlib) throws Exception{
+    Libro libro = librorepo.getById(idlib);
+    Foto fote=new Foto();
+    if( libro!=null){
+        foto.guardar(archivo);
+       libro.setFoto(fote);
+       librorepo.save(libro) ;
+    }else{throw new Exception("error usuario invalido");}
+    
+}
     private void validar(Libro libro) throws Exception {
         if(libro.getTitulo()==null||libro.getTitulo().isEmpty()){
         throw new Exception("el titulo esta vacio");
@@ -95,4 +109,13 @@ public class LibroServi {
             throw new Exception("la editorial no fue ingresada");
         }*/
     }
-}
+     @Transactional
+    public void baja(String id){
+       Libro lib=librorepo.findById(id).orElse(null);
+       lib.setAlta(false);
+    }
+    @Transactional
+     public void alta(String id){
+       Libro lib=librorepo.findById(id).orElse(null);
+       lib.setAlta(true);
+} }

@@ -34,7 +34,7 @@ public class listado {
     @Autowired
     AutorServi autorS;
     @GetMapping("/todos")
-
+ 
     String listadodetodos() {
        
         return "listadotodos";
