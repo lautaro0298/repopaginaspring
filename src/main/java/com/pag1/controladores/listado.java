@@ -9,6 +9,7 @@ import com.pag1.entidades.Editorial;
 import com.pag1.entidades.Libro;
 import com.pag1.servicios.AutorServi;
 import com.pag1.servicios.EditorialServi;
+import com.pag1.servicios.FotoServi;
 import com.pag1.servicios.LibroServi;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class listado {
     EditorialServi ediS;
     @Autowired
     AutorServi autorS;
+    @Autowired 
+    FotoServi fotos;
     @GetMapping("/todos")
  
     String listadodetodos() {

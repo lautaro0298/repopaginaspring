@@ -22,7 +22,7 @@ public class Prestamo {
    
     private Date fechaprestamo;
     private Date fechadebolucion;
-    @OneToMany
+    @OneToOne
     private Libro libro;
     @OneToOne
     private Usuario usuario;

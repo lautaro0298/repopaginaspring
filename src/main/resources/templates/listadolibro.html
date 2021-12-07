@@ -2,11 +2,11 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:replace="/fragments/head :: head"></head>
-    <nav th:replace="/fragments/navbar :: nav"></nav>
-  <body>
+   
+  <body >
     <!--
        div de exito
-        -->
+        --> <nav th:replace="/fragments/navbar :: nav"></nav>
     <div th:if="${exito}!=null" class="p-3 mb-3 bg-success text-white">
       <p th:text="${exito}"></p>
     </div>
@@ -14,12 +14,14 @@
       <p th:text="${error}"></p>
     </div>
     <!-- comment -->
-    <h2>Listado De libros</h2>
+    <h2 class="p-3 mb-2 bg-dark text-white">Listado De libros</h2>
     <table class="table table-dark table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Id base de datos</th>
           <th scope="col">Titulo</th>
+          
           <th scope="col">Año</th>
           <th scope="col">ISBN</th>
           <th scope="col">Autor</th>
@@ -31,6 +33,7 @@
       </thead>
       <tbody th:each="libro : ${lista}">
         <tr>
+          <th ><img th:if="${libro.foto} != null" th:src="${'/foto/libro/' + libro.id}" alt="" style="max-height: 100px"></th>
           <th th:text="${libro.id}"></th>
           <td th:text="${libro.titulo}"></td>
           <td th:text="${libro.anio}"></td>

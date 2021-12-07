@@ -6,8 +6,8 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="/fragments/head :: head"></head>
-    <nav th:replace="/fragments/navbar :: nav"></nav>
-    <body>
+    <link href="https://getbootstrap.com/docs/5.1/examples/sign-in/signin.css" rel="stylesheet">
+    <body class="form-signin" ><nav th:replace="/fragments/navbar :: nav"></nav><main class="form-signin">
 <!--
 barra de navegacion
 
@@ -22,8 +22,13 @@ div de exito
 formulario para registro de nuevos libros
 
         -->
-        <form th:action="@{/crud/libro}" method="POST"  ><div class="mb-3">
-                <label for="titulo" class="form-label">titulo</label>
+        <form th:action="@{/crud/libro}" method="POST" enctype="multipart/form-data" ><div class="mb-3">
+            <label for="archivo" class="form-label">Imagen</label>
+                
+            <input type="file" class="form-control" id="archivo" name="archivo">
+        </div>
+            <label for="titulo" class="form-label">titulo</label>
+                
                 <input type="text" class="form-control" id="titulo" placeholder="El señor de los anillos" name="titulo">
             </div>
             <div class="mb-3">
@@ -37,6 +42,10 @@ formulario para registro de nuevos libros
             <div class="mb-3">
                 <label for="ejemplares" class="form-label">numero de ejemplares</label>
                 <input type="number" class="form-control" id="ejemplares" placeholder="100" name="ejemplares">
+            </div>
+            <div>
+                <label for="descripcion" class="form-label">descripcion</label>
+                <input type="textarea" class="form-control" id="descripcion" placeholder="Aca se ingresa una descripcion breve del libro para luego poder mostrarla en el inicio" name="descripcion">
             </div>
             <div> 
                 <select  class="form-select" aria-label="Default select example" name="idautor" id="idautor">
@@ -55,7 +64,7 @@ formulario para registro de nuevos libros
                 </select>
                </div>
             <div><button type="submit" class="btn btn-primary">enviar</button></div>
-        </form>
+        </form></main>
     </body>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

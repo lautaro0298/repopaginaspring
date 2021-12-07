@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head replace="/fragments/head :: head"></head>
+<body>
+    <nav th:replace="/fragments/navbar :: nav"></nav>
+    <main>
+        <h1>Listado de Usuarios</h1>
+        <table>
+            <thead>
+                <th>Mail</th>
+                <th>Contraseña</th>
+                <th>Tipo</th>
+            </thead>
+            <tr th:each="usuario : ${lista}">
+                <th th:text="${usuario.email}"></th>
+                <th th:text="${usuario.rol}"></th>
+
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

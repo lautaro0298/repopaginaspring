@@ -22,19 +22,21 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class LibroServi {
     @Autowired
-    Librorepo librorepo;
+     Librorepo librorepo;
     @Autowired
     Autorrepo auto;
     @Autowired
     Editorialrepo adi;
     @Autowired 
-    FotoServi foto;
+    FotoServi fotoS;
     
     @Transactional
-    public void registrar (String titulo , int anio,int ejemplares , long isbn , Autor aut,Editorial e) throws Exception{
+    public void registrar (MultipartFile imagen,String titulo ,String descripcion, int anio,int ejemplares , long isbn , Autor aut,Editorial e) throws Exception{
     Libro libro = new Libro();
-    
+    Foto fot=fotoS.guardar(imagen);
+    libro.setFoto(fot);
     libro.setTitulo(titulo);
+    libro.setDescripcion(descripcion);
     libro.setAnio(anio);
     libro.setEjemplares(ejemplares);
     libro.setEjemplaresRestantes(ejemplares);
@@ -81,7 +83,7 @@ public class LibroServi {
     Libro libro = librorepo.getById(idlib);
     Foto fote=new Foto();
     if( libro!=null){
-        foto.guardar(archivo);
+        fotoS.guardar(archivo);
        libro.setFoto(fote);
        librorepo.save(libro) ;
     }else{throw new Exception("error usuario invalido");}

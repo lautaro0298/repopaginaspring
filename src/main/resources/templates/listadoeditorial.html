@@ -2,9 +2,9 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:replace="/fragments/head :: head"></head>
-    <nav th:replace="/fragments/navbar :: nav"></nav>
-  <body>
-
+   
+  <body class="p-3 mb-2 bg-secondary text-white">
+ <nav th:replace="/fragments/navbar :: nav"></nav>
     <!--
        div de exito
         -->
@@ -15,7 +15,7 @@
       <p th:text="${error}"></p>
     </div>
     <!-- comment -->
-    <h2>Listado De editorial</h2>
+    <h2 class="p-3 mb-2 bg-dark text-white">Listado De editorial</h2>
     <table class="table table-dark table-striped">
       <thead>
         <tr>

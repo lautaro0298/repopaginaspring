@@ -8,6 +8,7 @@ import com.pag1.entidades.Libro;
 import com.pag1.servicios.AutorServi;
 import com.pag1.servicios.EditorialServi;
 import com.pag1.servicios.LibroServi;
+import com.pag1.servicios.UsuarioServi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -30,6 +32,9 @@ public class registro {
     AutorServi autorS;
     @Autowired
     EditorialServi editorialS;
+    @Autowired
+    UsuarioServi usuS;
+    
             
 @GetMapping("/todos")
 public String todos(){
@@ -42,12 +47,13 @@ public String registrolibro(ModelMap modelo){
     return "registroLibro";
 }
   @PostMapping("/libro")
-  public String crearlibro(ModelMap modelo , @RequestParam String titulo , @RequestParam int anio ,@RequestParam int ejemplares,@RequestParam long isbn,@RequestParam String idautor, @RequestParam String ideditorial ) throws Exception {
+  public String crearlibro(ModelMap modelo ,MultipartFile archivo, @RequestParam String titulo ,@RequestParam String descripcion, @RequestParam int anio ,@RequestParam int ejemplares,@RequestParam long isbn,@RequestParam String idautor, @RequestParam String ideditorial ) throws Exception {
       try{
           
-      libroS.registrar(titulo , anio,ejemplares ,isbn ,autorS.buscarporid(idautor),editorialS.buscarporid(ideditorial));
+      libroS.registrar(archivo,titulo ,descripcion, anio,ejemplares ,isbn ,autorS.buscarporid(idautor),editorialS.buscarporid(ideditorial));
       modelo.put("exito", "registro exitoso");
-      return "registroLibro";
+      return "registroLibro"; 
+   
       }catch(Exception e){
           modelo.put("error", "falto un dato");
           return "registroLibro";        
@@ -84,4 +90,18 @@ public String registroeditorial(){
           return "listadoeditorial";        
       }
 }
+  @GetMapping("/usuario")
+  public String registrarusuario(ModelMap modelo){
+      return "registrousuario";
+  }
+  @PostMapping("/usuario")
+  public String registrousuari(ModelMap modelo ,@RequestParam String email, @RequestParam String password) throws Exception{
+     try{ 
+         usuS.registrar(email, email, password);
+         return"index";
+     }
+     catch(Exception e ){throw new Exception("Error");}
+      
+    
+  }
 }
